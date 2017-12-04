@@ -291,16 +291,6 @@ public class CallHandler extends TextWebSocketHandler {
                     "No active sender now. Become sender or . Try again later ...");
             session.sendMessage(new TextMessage(response.toString()));
         } else {
-//            if (viewers.containsKey(session.getId())) {
-//                JsonObject response = new JsonObject();
-//                response.addProperty("id", "viewerCameraResponse");
-//                response.addProperty("response", "rejected");
-//                response.addProperty("message", "You are already viewing in this session. "
-//                        + "Use a different browser to add additional viewers.");
-//                session.sendMessage(new TextMessage(response.toString()));
-//                return;
-//            }
-
             UserSession viewer = viewers.get(session.getId());
             if (viewer == null) {
                 viewer = new UserSession(session);
