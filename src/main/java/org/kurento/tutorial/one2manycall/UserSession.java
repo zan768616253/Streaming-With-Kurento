@@ -39,7 +39,8 @@ public class UserSession {
   private static final Logger log = LoggerFactory.getLogger(UserSession.class);
 
   private final WebSocketSession session;
-  private WebRtcEndpoint webRtcEndpoint;
+  private WebRtcEndpoint webRtcScreenEndpoint;
+  private WebRtcEndpoint webRtcCameraEndpoint;
 
   public UserSession(WebSocketSession session) {
     this.session = session;
@@ -54,15 +55,24 @@ public class UserSession {
     session.sendMessage(new TextMessage(message.toString()));
   }
 
-  public WebRtcEndpoint getWebRtcEndpoint() {
-    return webRtcEndpoint;
+  public WebRtcEndpoint getWebRtcScreenEndpoint() {
+    return webRtcScreenEndpoint;
+  }
+  public WebRtcEndpoint getWebRtcCameraEndpoint() {
+    return webRtcCameraEndpoint;
   }
 
-  public void setWebRtcEndpoint(WebRtcEndpoint webRtcEndpoint) {
-    this.webRtcEndpoint = webRtcEndpoint;
+  public void setWebRtcScreenEndpoint(WebRtcEndpoint webRtcEndpoint) {
+    this.webRtcScreenEndpoint = webRtcEndpoint;
+  }
+  public void setWebRtcCameraEndpoint(WebRtcEndpoint webRtcEndpoint) {
+    this.webRtcCameraEndpoint = webRtcEndpoint;
   }
 
-  public void addCandidate(IceCandidate candidate) {
-    webRtcEndpoint.addIceCandidate(candidate);
+  public void addCandidateScreen(IceCandidate candidate) {
+    webRtcScreenEndpoint.addIceCandidate(candidate);
+  }
+  public void addCandidateCamera(IceCandidate candidate) {
+    webRtcCameraEndpoint.addIceCandidate(candidate);
   }
 }

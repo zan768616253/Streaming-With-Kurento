@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b934e631-bd81-4db0-a981-6da5666de995" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/kurento/tutorial/one2manycall/CallHandler$1.class" afterPath="$PROJECT_DIR$/target/classes/org/kurento/tutorial/one2manycall/CallHandler$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/kurento/tutorial/one2manycall/CallHandler$2.class" afterPath="$PROJECT_DIR$/target/classes/org/kurento/tutorial/one2manycall/CallHandler$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/org/kurento/tutorial/one2manycall/CallHandler.class" afterPath="$PROJECT_DIR$/target/classes/org/kurento/tutorial/one2manycall/CallHandler.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/CallHandler.java" afterPath="$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/CallHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/UserSession.java" afterPath="$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/UserSession.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/js/index.js" afterPath="$PROJECT_DIR$/src/main/resources/static/js/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/static/js/index.js" afterPath="$PROJECT_DIR$/target/classes/static/js/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +24,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="81" column="41" lean-forward="true" selection-start-line="81" selection-start-column="41" selection-end-line="81" selection-end-column="41" />
+            <state relative-caret-position="366">
+              <caret line="258" column="34" lean-forward="false" selection-start-line="258" selection-start-column="14" selection-end-line="258" selection-end-column="34" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -32,13 +36,32 @@
       <file leaf-file-name="CallHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/CallHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="187" column="19" lean-forward="true" selection-start-line="187" selection-start-column="19" selection-end-line="187" selection-end-column="19" />
+            <state relative-caret-position="483">
+              <caret line="107" column="44" lean-forward="false" selection-start-line="107" selection-start-column="32" selection-end-line="107" selection-end-column="44" />
               <folding>
-                <element signature="e#6426#7038#0" expanded="true" />
-                <element signature="e#7037#7038#0" expanded="true" />
-                <element signature="e#8762#9318#0" expanded="true" />
-                <element signature="e#9317#9318#0" expanded="true" />
+                <element signature="e#6299#6945#0" expanded="true" />
+                <element signature="e#6944#6945#0" expanded="true" />
+                <element signature="e#8026#8671#0" expanded="true" />
+                <element signature="e#8670#8671#0" expanded="true" />
+                <element signature="e#10667#11375#0" expanded="true" />
+                <element signature="e#11374#11375#0" expanded="true" />
+                <element signature="e#13530#14238#0" expanded="true" />
+                <element signature="e#14237#14238#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserSession.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/UserSession.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="42" column="44" lean-forward="false" selection-start-line="42" selection-start-column="44" selection-end-line="42" selection-end-column="44" />
+              <folding>
+                <element signature="e#2167#2168#0" expanded="true" />
+                <element signature="e#2224#2225#0" expanded="true" />
+                <element signature="e#2283#2284#0" expanded="true" />
+                <element signature="e#2340#2341#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -48,7 +71,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/static/lib/kurento-utils.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="398">
-              <caret line="255" column="39" lean-forward="true" selection-start-line="255" selection-start-column="39" selection-end-line="255" selection-end-column="39" />
+              <caret line="255" column="39" lean-forward="false" selection-start-line="255" selection-start-column="39" selection-end-line="255" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -58,28 +81,40 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>video</find>
-      <find>webRtcPeer</find>
-      <find>pc</find>
-      <find>Failed to set remote answer s</find>
-      <find>catch</find>
-      <find>ICE candidate</find>
-      <find>ice</find>
-      <find>setRemoteDescription</find>
-      <find>onIceCandidateScreen</find>
-      <find>onIceCandidateCamera</find>
-      <find>onIceCandidate</find>
       <find>iceCandidate</find>
+      <find>presenter</find>
+      <find>'callResponse'</find>
+      <find>present</find>
+      <find>presenterResponse</find>
+      <find>ICE candidate</find>
+      <find>iceCandidateScreen</find>
+      <find>onIceCandidateScreen</find>
+      <find>user</find>
+      <find>addCandidate</find>
+      <find>webRtcEndpoint</find>
+      <find>getWebRtcEndpoint</find>
+      <find>set</find>
+      <find>UserSession user</find>
+      <find>candidate</find>
+      <find>onOfferViewer</find>
       <find>viewerResponse</find>
-      <find>&quot;iceCandidate&quot;</find>
-      <find>prent</find>
-      <find>string</find>
-      <find>jsonMessage</find>
-      <find>Unrecognized message</find>
-      <find>response</find>
+      <find>screen</find>
+      <find>iceCandidateViewer</find>
+      <find>getWebRtcScreenEndpoint</find>
+      <find>iceCandidateViewerCamera</find>
+      <find>webRtcPeer_vs</find>
+      <find>dispose</find>
+      <find>viewerCamera</find>
+      <find>UserSession</find>
+      <find>presenterUserSession</find>
+      <find>viewer</find>
+      <find>session</find>
+      <find>viewerCameraResponse</find>
+      <find>video</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
+      <dir>$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -95,8 +130,9 @@
       <list>
         <option value="$PROJECT_DIR$/.bowerrc" />
         <option value="$PROJECT_DIR$/src/main/resources/static/index.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/js/index.js" />
+        <option value="$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/UserSession.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/CallHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/index.js" />
       </list>
     </option>
   </component>
@@ -107,9 +143,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="3140" />
+    <option name="x" value="3518" />
     <option name="y" value="23" />
-    <option name="width" value="1980" />
+    <option name="width" value="1602" />
     <option name="height" value="1417" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -352,27 +388,27 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3970000" />
+    <option name="totallyTimeSpent" value="9437000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="3140" y="23" width="1980" height="1417" extended-state="0" />
+    <frame x="3518" y="23" width="1602" height="1417" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14372164" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29727685" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22423288" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22390318" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18111455" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.225" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -423,41 +459,30 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/CallHandler.java</url>
-          <line>210</line>
+          <line>233</line>
           <properties />
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/CallHandler.java</url>
-          <line>71</line>
+          <line>338</line>
           <properties />
-          <option name="timeStamp" value="7" />
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/CallHandler.java</url>
-          <line>78</line>
+          <line>314</line>
           <properties />
-          <option name="timeStamp" value="8" />
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/CallHandler.java</url>
-          <line>189</line>
+          <line>276</line>
           <properties />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/CallHandler.java</url>
-          <line>244</line>
-          <properties />
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/CallHandler.java</url>
-          <line>183</line>
-          <properties />
-          <option name="timeStamp" value="15" />
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="17" />
+      <option name="time" value="23" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -607,10 +632,14 @@
         <state relative-caret-position="1773">
           <caret line="228" column="9" lean-forward="true" selection-start-line="228" selection-start-column="9" selection-end-line="228" selection-end-column="9" />
           <folding>
-            <element signature="e#6426#7038#0" expanded="true" />
-            <element signature="e#7037#7038#0" expanded="true" />
-            <element signature="e#8762#9318#0" expanded="true" />
-            <element signature="e#9317#9318#0" expanded="true" />
+            <element signature="e#6299#6945#0" expanded="true" />
+            <element signature="e#6944#6945#0" expanded="true" />
+            <element signature="e#8026#8671#0" expanded="true" />
+            <element signature="e#8670#8671#0" expanded="true" />
+            <element signature="e#10667#11375#0" expanded="true" />
+            <element signature="e#11374#11375#0" expanded="true" />
+            <element signature="e#13530#14238#0" expanded="true" />
+            <element signature="e#14237#14238#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -626,6 +655,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -666,7 +696,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/lib/kurento-utils.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
-          <caret line="255" column="39" lean-forward="true" selection-start-line="255" selection-start-column="39" selection-end-line="255" selection-end-column="39" />
+          <caret line="255" column="39" lean-forward="false" selection-start-line="255" selection-start-column="39" selection-end-line="255" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -695,10 +725,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/UserSession.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="42" column="44" lean-forward="false" selection-start-line="42" selection-start-column="44" selection-end-line="42" selection-end-column="44" />
+          <folding>
+            <element signature="e#2167#2168#0" expanded="true" />
+            <element signature="e#2224#2225#0" expanded="true" />
+            <element signature="e#2283#2284#0" expanded="true" />
+            <element signature="e#2340#2341#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/util/concurrent/ConcurrentHashMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="1004" column="13" lean-forward="false" selection-start-line="1004" selection-start-column="13" selection-end-line="1004" selection-end-column="13" />
+          <folding>
+            <element signature="e#44347#44348#0" expanded="true" />
+            <element signature="e#44395#44396#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="81" column="41" lean-forward="true" selection-start-line="81" selection-start-column="41" selection-end-line="81" selection-end-column="41" />
+        <state relative-caret-position="366">
+          <caret line="258" column="34" lean-forward="false" selection-start-line="258" selection-start-column="14" selection-end-line="258" selection-end-column="34" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -707,13 +761,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/kurento/tutorial/one2manycall/CallHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="187" column="19" lean-forward="true" selection-start-line="187" selection-start-column="19" selection-end-line="187" selection-end-column="19" />
+        <state relative-caret-position="483">
+          <caret line="107" column="44" lean-forward="false" selection-start-line="107" selection-start-column="32" selection-end-line="107" selection-end-column="44" />
           <folding>
-            <element signature="e#6426#7038#0" expanded="true" />
-            <element signature="e#7037#7038#0" expanded="true" />
-            <element signature="e#8762#9318#0" expanded="true" />
-            <element signature="e#9317#9318#0" expanded="true" />
+            <element signature="e#6299#6945#0" expanded="true" />
+            <element signature="e#6944#6945#0" expanded="true" />
+            <element signature="e#8026#8671#0" expanded="true" />
+            <element signature="e#8670#8671#0" expanded="true" />
+            <element signature="e#10667#11375#0" expanded="true" />
+            <element signature="e#11374#11375#0" expanded="true" />
+            <element signature="e#13530#14238#0" expanded="true" />
+            <element signature="e#14237#14238#0" expanded="true" />
           </folding>
         </state>
       </provider>

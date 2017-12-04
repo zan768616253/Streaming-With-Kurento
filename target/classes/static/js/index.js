@@ -38,38 +38,50 @@ ws.onmessage = function(message) {
 	console.info('Received message: ' + message.data);
 
 	switch (parsedMessage.id) {
-	case 'presenterResponse':
-		presenterResponse(parsedMessage);
+	case 'presenterScreenResponse':
+        presenterScreenResponse(parsedMessage);
 		break;
-	case 'viewerResponse':
-		viewerResponse(parsedMessage);
+    case 'presenterCameraResponse':
+        presenterCameraResponse(parsedMessage);
+        break;
+	case 'viewerScreenResponse':
+        viewerScreenResponse(parsedMessage);
 		break;
-	case 'iceCandidate':
-	    if (webRtcPeer_ps) {
+    case 'viewerCameraResponse':
+        viewerCameraResponse(parsedMessage);
+        break;
+    case 'iceCandidateScreen':
+        if (webRtcPeer_ps) {
             webRtcPeer_ps.addIceCandidate(parsedMessage.candidate, function(error) {
                 if (error)
                     return console.error('Error adding candidate: ' + error);
             });
         }
+        break;
+    case 'iceCandidateCamera':
         if (webRtcPeer_pc) {
             webRtcPeer_pc.addIceCandidate(parsedMessage.candidate, function(error) {
                 if (error)
                     return console.error('Error adding candidate: ' + error);
             });
         }
+        break;
+	case 'iceCandidateViewerScreen':
         if (webRtcPeer_vs) {
             webRtcPeer_vs.addIceCandidate(parsedMessage.candidate, function(error) {
                 if (error)
                     return console.error('Error adding candidate: ' + error);
             });
         }
+		break;
+    case 'iceCandidateViewerCamera':
         if (webRtcPeer_vc) {
             webRtcPeer_vc.addIceCandidate(parsedMessage.candidate, function(error) {
                 if (error)
                     return console.error('Error adding candidate: ' + error);
             });
         }
-		break;
+        break;
 	case 'stopCommunication':
 		dispose();
 		break;
@@ -78,7 +90,22 @@ ws.onmessage = function(message) {
 	}
 }
 
-function presenterResponse(message) {
+function presenterCameraResponse(message) {
+    if (message.response != 'accepted') {
+        var errorMsg = message.message ? message.message : 'Unknow error';
+        console.info('Call not accepted for the following reason: ' + errorMsg);
+        dispose();
+    } else {
+        if (webRtcPeer_pc) {
+            webRtcPeer_pc.processAnswer(message.sdpAnswer, function(error) {
+                if (error)
+                    return console.error(error);
+            });
+        }
+    }
+}
+
+function presenterScreenResponse(message) {
 	if (message.response != 'accepted') {
 		var errorMsg = message.message ? message.message : 'Unknow error';
 		console.info('Call not accepted for the following reason: ' + errorMsg);
@@ -90,16 +117,10 @@ function presenterResponse(message) {
                     return console.error(error);
             });
         }
-        if (webRtcPeer_pc) {
-            webRtcPeer_pc.processAnswer(message.sdpAnswer, function(error) {
-                if (error)
-                    return console.error(error);
-            });
-        }
 	}
 }
 
-function viewerResponse(message) {
+function viewerScreenResponse(message) {
 	if (message.response != 'accepted') {
 		var errorMsg = message.message ? message.message : 'Unknow error';
 		console.info('Call not accepted for the following reason: ' + errorMsg);
@@ -110,6 +131,19 @@ function viewerResponse(message) {
 				return console.error(error);
 		});
 	}
+}
+
+function viewerCameraResponse(message) {
+    if (message.response != 'accepted') {
+        var errorMsg = message.message ? message.message : 'Unknow error';
+        console.info('Call not accepted for the following reason: ' + errorMsg);
+        dispose();
+    } else {
+        webRtcPeer_vc.processAnswer(message.sdpAnswer, function(error) {
+            if (error)
+                return console.error(error);
+        });
+    }
 }
 
 function presenter() {
@@ -159,6 +193,16 @@ function viewer() {
 					}
 					this.generateOffer(onOfferViewer);
 				});
+        webRtcPeer_vc = new kurentoUtils.WebRtcPeer.WebRtcPeerRecvonly({
+                remoteVideo : camera,
+                onicecandidate : onIceCandidateCamera
+            },
+            function(error) {
+                if (error) {
+                    return console.error(error);
+                }
+                this.generateOffer(onOfferViewerCamera);
+            });
 
 		enableStopButton();
 	}
@@ -191,10 +235,21 @@ function onOfferViewer(error, offerSdp) {
 		return console.error('Error generating the offer');
 	console.info('Invoking SDP offer callback function ' + location.host);
 	var message = {
-		id : 'viewer',
+		id : 'vs',
 		sdpOffer : offerSdp
 	}
 	sendMessage(message);
+}
+
+function onOfferViewerCamera(error, offerSdp) {
+    if (error)
+        return console.error('Error generating the offer');
+    console.info('Invoking SDP offer callback function ' + location.host);
+    var message = {
+        id : 'vc',
+        sdpOffer : offerSdp
+    }
+    sendMessage(message);
 }
 
 function onIceCandidateCamera(candidate) {
