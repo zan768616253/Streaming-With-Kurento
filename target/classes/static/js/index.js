@@ -84,10 +84,18 @@ function presenterResponse(message) {
 		console.info('Call not accepted for the following reason: ' + errorMsg);
 		dispose();
 	} else {
-        webRtcPeer_ps.processAnswer(message.sdpAnswer, function(error) {
-			if (error)
-				return console.error(error);
-		});
+	    if (webRtcPeer_ps) {
+            webRtcPeer_ps.processAnswer(message.sdpAnswer, function(error) {
+                if (error)
+                    return console.error(error);
+            });
+        }
+        if (webRtcPeer_pc) {
+            webRtcPeer_pc.processAnswer(message.sdpAnswer, function(error) {
+                if (error)
+                    return console.error(error);
+            });
+        }
 	}
 }
 
@@ -121,19 +129,19 @@ function presenter() {
                     webRtcPeer_ps.generateOffer(onOfferPresenter);
 				});
 
+        webRtcPeer_pc = new kurentoUtils.WebRtcPeer.WebRtcPeerSendonly({
+        	localVideo : camera,
+        	onicecandidate : onIceCandidateCamera
+        }, 	function(error) {
+        		if (error) {
+        			return console.error(error);
+        		}
+            webRtcPeer_pc.generateOffer(onOfferPresenterCamera);
+        	}
+        )
+
 		enableStopButton();
 	}
-}
-
-function onOfferPresenter(error, offerSdp) {
-	if (error)
-		return console.error('Error generating the offer');
-	console.info('Invoking SDP offer callback function ' + location.host);
-	var message = {
-		id : 'presenter',
-		sdpOffer : offerSdp
-	}
-	sendMessage(message);
 }
 
 function viewer() {
@@ -156,6 +164,28 @@ function viewer() {
 	}
 }
 
+function onOfferPresenter(error, offerSdp) {
+    if (error)
+        return console.error('Error generating the offer');
+    console.info('Invoking SDP offer callback function ' + location.host);
+    var message = {
+        id : 'ps',
+        sdpOffer : offerSdp
+    }
+    sendMessage(message);
+}
+
+function onOfferPresenterCamera(error, offerSdp) {
+    if (error)
+        return console.error('Error generating the offer');
+    console.info('Invoking SDP offer callback function ' + location.host);
+    var message = {
+        id : 'pc',
+        sdpOffer : offerSdp
+    }
+    sendMessage(message);
+}
+
 function onOfferViewer(error, offerSdp) {
 	if (error)
 		return console.error('Error generating the offer');
@@ -167,11 +197,21 @@ function onOfferViewer(error, offerSdp) {
 	sendMessage(message);
 }
 
+function onIceCandidateCamera(candidate) {
+    console.log("Local candidate" + JSON.stringify(candidate));
+
+    var message = {
+        id : 'onIceCandidateCamera',
+        candidate : candidate
+    };
+    sendMessage(message);
+}
+
 function onIceCandidate(candidate) {
 	console.log("Local candidate" + JSON.stringify(candidate));
 
 	var message = {
-		id : 'onIceCandidate',
+		id : 'onIceCandidateScreen',
 		candidate : candidate
 	};
 	sendMessage(message);

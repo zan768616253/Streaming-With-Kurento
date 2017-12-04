@@ -64,7 +64,8 @@ public class CallHandler extends TextWebSocketHandler {
     log.debug("Incoming message from session '{}': {}", session.getId(), jsonMessage);
 
     switch (jsonMessage.get("id").getAsString()) {
-      case "presenter":
+      case "ps":
+      case "pc":
         try {
           presenter(session, jsonMessage);
         } catch (Throwable t) {
@@ -78,7 +79,8 @@ public class CallHandler extends TextWebSocketHandler {
           handleErrorResponse(t, session, "viewerResponse");
         }
         break;
-      case "onIceCandidate": {
+      case "onIceCandidateCamera":
+      case "onIceCandidateScreen": {
         JsonObject candidate = jsonMessage.get("candidate").getAsJsonObject();
 
         UserSession user = null;
@@ -116,31 +118,78 @@ public class CallHandler extends TextWebSocketHandler {
     session.sendMessage(new TextMessage(response.toString()));
   }
 
-  private synchronized void presenter(final WebSocketSession session, JsonObject jsonMessage)
+  private synchronized void presenter(final WebSocketSession session, final JsonObject jsonMessage)
       throws IOException {
-    if (presenterUserSession == null) {
-      presenterUserSession = new UserSession(session);
+//    if (presenterUserSession == null) {
+//      presenterUserSession = new UserSession(session);
+//
+//      pipeline = kurento.createMediaPipeline();
+//      presenterUserSession.setWebRtcEndpoint(new WebRtcEndpoint.Builder(pipeline).build());
+//
+//      WebRtcEndpoint presenterWebRtc = presenterUserSession.getWebRtcEndpoint();
+//
+//      presenterWebRtc.addIceCandidateFoundListener(new EventListener<IceCandidateFoundEvent>() {
+//
+//        @Override
+//        public void onEvent(IceCandidateFoundEvent event) {
+//          JsonObject response = new JsonObject();
+//          response.addProperty("id", "iceCandidate");
+//          response.add("candidate", JsonUtils.toJsonObject(event.getCandidate()));
+//          try {
+//            synchronized (session) {
+//              session.sendMessage(new TextMessage(response.toString()));
+//            }
+//          } catch (IOException e) {
+//            log.debug(e.getMessage());
+//          }
+//        }
+//      });
+//
+//      String sdpOffer = jsonMessage.getAsJsonPrimitive("sdpOffer").getAsString();
+//      String sdpAnswer = presenterWebRtc.processOffer(sdpOffer);
+//
+//      JsonObject response = new JsonObject();
+//      response.addProperty("id", "presenterResponse");
+//      response.addProperty("response", "accepted");
+//      response.addProperty("sdpAnswer", sdpAnswer);
+//
+//      synchronized (session) {
+//        presenterUserSession.sendMessage(response);
+//      }
+//      presenterWebRtc.gatherCandidates();
+//
+//    } else {
+//      JsonObject response = new JsonObject();
+//      response.addProperty("id", "presenterResponse");
+//      response.addProperty("response", "rejected");
+//      response.addProperty("message",
+//          "Another user is currently acting as sender. Try again later ...");
+//      session.sendMessage(new TextMessage(response.toString()));
+//    }
 
-      pipeline = kurento.createMediaPipeline();
+      if (presenterUserSession == null) {
+          presenterUserSession = new UserSession(session);
+          pipeline = kurento.createMediaPipeline();
+      }
+
       presenterUserSession.setWebRtcEndpoint(new WebRtcEndpoint.Builder(pipeline).build());
-
       WebRtcEndpoint presenterWebRtc = presenterUserSession.getWebRtcEndpoint();
 
       presenterWebRtc.addIceCandidateFoundListener(new EventListener<IceCandidateFoundEvent>() {
 
-        @Override
-        public void onEvent(IceCandidateFoundEvent event) {
-          JsonObject response = new JsonObject();
-          response.addProperty("id", "iceCandidate");
-          response.add("candidate", JsonUtils.toJsonObject(event.getCandidate()));
-          try {
-            synchronized (session) {
-              session.sendMessage(new TextMessage(response.toString()));
-            }
-          } catch (IOException e) {
-            log.debug(e.getMessage());
+          @Override
+          public void onEvent(IceCandidateFoundEvent event) {
+              JsonObject response = new JsonObject();
+              response.addProperty("id", "iceCandidate");
+              response.add("candidate", JsonUtils.toJsonObject(event.getCandidate()));
+              try {
+                  synchronized (session) {
+                      session.sendMessage(new TextMessage(response.toString()));
+                  }
+              } catch (IOException e) {
+                  log.debug(e.getMessage());
+              }
           }
-        }
       });
 
       String sdpOffer = jsonMessage.getAsJsonPrimitive("sdpOffer").getAsString();
@@ -152,18 +201,9 @@ public class CallHandler extends TextWebSocketHandler {
       response.addProperty("sdpAnswer", sdpAnswer);
 
       synchronized (session) {
-        presenterUserSession.sendMessage(response);
+          presenterUserSession.sendMessage(response);
       }
       presenterWebRtc.gatherCandidates();
-
-    } else {
-      JsonObject response = new JsonObject();
-      response.addProperty("id", "presenterResponse");
-      response.addProperty("response", "rejected");
-      response.addProperty("message",
-          "Another user is currently acting as sender. Try again later ...");
-      session.sendMessage(new TextMessage(response.toString()));
-    }
   }
 
   private synchronized void viewer(final WebSocketSession session, JsonObject jsonMessage)
