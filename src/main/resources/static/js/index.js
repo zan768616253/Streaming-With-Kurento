@@ -15,7 +15,8 @@
  *
  */
 
-var ws = new WebSocket('wss://' + location.host + '/call');
+var ws = new WebSocket('ws://' + location.host + '/call');
+console.log('ws://' + location.host + '/call')
 var video, camera;
 var webRtcPeer_ps;
 var webRtcPeer_pc;

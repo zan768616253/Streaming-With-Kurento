@@ -70,7 +70,7 @@ public class CallHandler extends TextWebSocketHandler {
                 try {
                     presenterScreen(session, jsonMessage);
                 } catch (Throwable t) {
-                    handleErrorResponse(t, session, "presenterScreenResponse");
+                    handleErrorResponse(t, session, "presenterScreenRes-ponse");
                 }
                 break;
             case "pc":
