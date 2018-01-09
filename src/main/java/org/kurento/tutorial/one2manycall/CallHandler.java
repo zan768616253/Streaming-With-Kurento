@@ -20,12 +20,7 @@ package org.kurento.tutorial.one2manycall;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.kurento.client.EventListener;
-import org.kurento.client.IceCandidate;
-import org.kurento.client.IceCandidateFoundEvent;
-import org.kurento.client.KurentoClient;
-import org.kurento.client.MediaPipeline;
-import org.kurento.client.WebRtcEndpoint;
+import org.kurento.client.*;
 import org.kurento.jsonrpc.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +42,11 @@ import com.google.gson.JsonObject;
  */
 public class CallHandler extends TextWebSocketHandler {
 
+    private class RecordFlag {
+        public boolean Camera = false;
+        public boolean Screen = false;
+    }
+
     private static final Logger log = LoggerFactory.getLogger(CallHandler.class);
     private static final Gson gson = new GsonBuilder().create();
 
@@ -59,6 +59,10 @@ public class CallHandler extends TextWebSocketHandler {
     private UserSession presenterUserSession;
     private JsonObject candidate;
     private UserSession user;
+    private Composite composite;
+    private HubPort compositeOutput;
+    private RecorderEndpoint recorderEndpoint;
+    private RecordFlag recordFlag;
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -146,16 +150,35 @@ public class CallHandler extends TextWebSocketHandler {
         session.sendMessage(new TextMessage(response.toString()));
     }
 
-    private synchronized void presenterCamera(final WebSocketSession session, final JsonObject jsonMessage)
-            throws IOException {
-
+    private void initialPresenterMisc(final WebSocketSession session)
+    {
         if (presenterUserSession == null) {
             presenterUserSession = new UserSession(session);
             pipeline = kurento.createMediaPipeline();
+            composite = new Composite.Builder(pipeline).build();
+            recordFlag = new RecordFlag();
         }
+    }
 
+    private void record(){
+        boolean isReady = recordFlag.Camera && recordFlag.Screen;
+
+        if (isReady) {
+            compositeOutput = new HubPort.Builder(composite).build();
+            recorderEndpoint = new RecorderEndpoint.Builder(pipeline, "file:///Users/eric/Downloads/tmp/recording.webm").withMediaProfile(MediaProfileSpecType.WEBM).build();
+            compositeOutput.connect(recorderEndpoint);
+            recorderEndpoint.record();
+        }
+    }
+
+    private synchronized void presenterCamera(final WebSocketSession session, final JsonObject jsonMessage)
+            throws IOException {
+
+        initialPresenterMisc(session);
         presenterUserSession.setWebRtcCameraEndpoint(new WebRtcEndpoint.Builder(pipeline).build());
         WebRtcEndpoint presenterWebRtc = presenterUserSession.getWebRtcCameraEndpoint();
+        HubPort hubPort = new HubPort.Builder(composite).build();
+        presenterWebRtc.connect(hubPort);
 
         presenterWebRtc.addIceCandidateFoundListener(new EventListener<IceCandidateFoundEvent>() {
 
@@ -182,36 +205,39 @@ public class CallHandler extends TextWebSocketHandler {
         response.addProperty("response", "accepted");
         response.addProperty("sdpAnswer", sdpAnswer);
 
+        recordFlag.Camera = true;
+
         synchronized (session) {
             presenterUserSession.sendMessage(response);
         }
         presenterWebRtc.gatherCandidates();
+
+        record();
+
     }
 
     private synchronized void presenterScreen(final WebSocketSession session, final JsonObject jsonMessage)
             throws IOException {
 
-        if (presenterUserSession == null) {
-            presenterUserSession = new UserSession(session);
-            pipeline = kurento.createMediaPipeline();
-        }
-
+        initialPresenterMisc(session);
         presenterUserSession.setWebRtcScreenEndpoint(new WebRtcEndpoint.Builder(pipeline).build());
         WebRtcEndpoint presenterWebRtc = presenterUserSession.getWebRtcScreenEndpoint();
+        HubPort hubPort = new HubPort.Builder(composite).build();
+        presenterWebRtc.connect(hubPort);
 
         presenterWebRtc.addIceCandidateFoundListener(new EventListener<IceCandidateFoundEvent>() {
             @Override
             public void onEvent(IceCandidateFoundEvent event) {
-                JsonObject response = new JsonObject();
-                response.addProperty("id", "iceCandidateScreen");
-                response.add("candidate", JsonUtils.toJsonObject(event.getCandidate()));
-                try {
-                    synchronized (session) {
-                        session.sendMessage(new TextMessage(response.toString()));
-                    }
-                } catch (IOException e) {
-                    log.debug(e.getMessage());
+            JsonObject response = new JsonObject();
+            response.addProperty("id", "iceCandidateScreen");
+            response.add("candidate", JsonUtils.toJsonObject(event.getCandidate()));
+            try {
+                synchronized (session) {
+                    session.sendMessage(new TextMessage(response.toString()));
                 }
+            } catch (IOException e) {
+                log.debug(e.getMessage());
+            }
             }
         });
 
@@ -223,10 +249,14 @@ public class CallHandler extends TextWebSocketHandler {
         response.addProperty("response", "accepted");
         response.addProperty("sdpAnswer", sdpAnswer);
 
+        recordFlag.Screen = true;
+
         synchronized (session) {
             presenterUserSession.sendMessage(response);
         }
         presenterWebRtc.gatherCandidates();
+
+        record();
     }
 
     private synchronized void viewerCamera(final WebSocketSession session, JsonObject jsonMessage)
@@ -335,6 +365,7 @@ public class CallHandler extends TextWebSocketHandler {
 
     private synchronized void stop(WebSocketSession session) throws IOException {
         String sessionId = session.getId();
+        recorderEndpoint.stop();
         if (presenterUserSession != null && presenterUserSession.getSession().getId().equals(sessionId)) {
             for (UserSession viewer : viewers.values()) {
                 JsonObject response = new JsonObject();
@@ -357,6 +388,8 @@ public class CallHandler extends TextWebSocketHandler {
             }
             viewers.remove(sessionId);
         }
+        recordFlag = new RecordFlag();
+
     }
 
     @Override
